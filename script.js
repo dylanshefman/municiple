@@ -81,7 +81,7 @@ function filterCities(query) {
 function handleInputChange(event) {
     const inputElement = event.target;
     const query = inputElement.value;
-    const suggestionsContainer = document.getElementsByClassName("suggestions")[0];
+    const suggestionsContainer = document.getElementById("suggestions");
 
     const filteredCities = filterCities(query);
     displaySuggestions(inputElement, suggestionsContainer, filteredCities);
@@ -128,24 +128,24 @@ function displaySuggestions(inputElement, suggestionsContainer, filteredCities) 
 
 
 function handleArrowKeyNavigation(event) {
-    const suggestionsContainer = document.getElementsByClassName("suggestions")[0];
+    const suggestionsContainer = document.getElementById("suggestions");
     const suggestions = suggestionsContainer.getElementsByTagName("li");
 
-    if (suggestions.length > 0) {
-        if (event.key === "ArrowDown") {
+    if (suggestions.length > 0) { // suggestions are shown
+        if (event.key === "ArrowDown") { // move highlight down on arrow down
             currentIndex = (currentIndex + 1) % suggestions.length;
             highlightSuggestion(suggestions);
-        } else if (event.key === "ArrowUp") {
+        } else if (event.key === "ArrowUp") { // move highlight up on arrow up
             currentIndex = (currentIndex - 1 + suggestions.length) % suggestions.length;
             highlightSuggestion(suggestions);
         } else if (event.key === "Enter") {
             event.preventDefault();
             const inputElement = document.getElementById("enter-guess");
-            if (currentIndex >= 0 && currentIndex < suggestions.length) {
+            if (currentIndex >= 0 && currentIndex < suggestions.length) { // select highlighted suggestion
                 inputElement.value = suggestions[currentIndex].textContent.trim();
                 suggestionsContainer.innerHTML = "";
                 suggestionsContainer.classList.remove("suggestions-border");
-            } else {
+            } else { // submit
                 handleSubmit();
             }
         }
@@ -167,18 +167,21 @@ function highlightSuggestion(suggestions) {
 function handleSubmit(target) {
     const inputValue = document.getElementById("enter-guess").value.trim();
     const [guessedCity, guessedState] = inputValue.split(",").map(part => part.trim());
+    document.getElementById("enter-guess").value = "";
 
     const guessedCityData = cities.find(c =>
         c.city.toLowerCase() === guessedCity.toLowerCase() && c.state.toLowerCase() === guessedState.toLowerCase()
     );
 
+    let guessCount = document.cookie.split('; ').filter(cookie => cookie.startsWith('guess')).length;
     if (guessedCityData) {
+        encodeGuess(guessedCity, guessedState, guessCount);
         addGuess(guessedCityData, target);
         if (guessedCity === target.city && guessedState === target.state) { // player guessed correctly
             endGame();
         }
     } else {
-        alert("Invalid city or state");
+        showPopup("Invalid city");
     }
 }
 
@@ -323,11 +326,11 @@ function endGame() {
         const municipleURL = "dylanshefman.github.io/municiple";
         const shareStrLabeled = `Municiple ${estDate}\n${shareStr.trimEnd()}\n${municipleURL}`;
         navigator.clipboard.writeText(shareStrLabeled);
+        console.log(decodeURIComponent(document.cookie));
     })
 }
 
 function main() {
-    console.log(cities);
     const map = L.map("map", {
         zoomSnap: 0.1,
         dragging: false,
@@ -370,6 +373,7 @@ function main() {
     document.getElementById("submit").addEventListener("click", () => handleSubmit(target));
     document.getElementById("info").addEventListener("click", function() {
         document.getElementById("info-popup").classList.toggle("visible");
+        document.getElementById("suggestions").classList.add("invisible");
     })
 }
 
@@ -443,5 +447,51 @@ function buildShareStr(guessedCityData, target) {
 
     return shareStr_ + "\n";
 }
+
+function showPopup(message) {
+    // Create a new popup element
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.textContent = message;
+
+    // Append the popup to the body
+    document.body.appendChild(popup);
+
+    // Trigger the show animation
+    popup.classList.add('show');
+
+    // After 2 seconds, start hiding the popup
+    setTimeout(() => {
+        popup.classList.remove('show');
+        popup.classList.add('hide');
+    }, 2000); // 2 seconds
+
+    // Remove the popup from the DOM after the hide animation completes
+    popup.addEventListener('animationend', () => {
+        if (popup.classList.contains('hide')) {
+            document.body.removeChild(popup);
+        }
+    });
+}
+
+function encodeGuess(city, state, guessNumber) {
+    const guessStr = `${city},${state}`;
+
+    // calculate expiration date (next midnight EST)
+    const now = new Date();
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const estOffset = -5 * 60;
+    const estDate = new Date(utc + (60000 * estOffset));
+
+    // set expiration to next midnight
+    estDate.setUTCHours(5, 0, 0, 0);  // midnight EST is 5am UTC
+    const expires = estDate.toUTCString();
+
+    // set cookie
+    document.cookie = `guess${guessNumber}=${guessStr}; expires=${expires}; path=/`;
+}
+
+
+
 
 main();

@@ -12,11 +12,26 @@ body {
     background-color: white;
 }
 
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    #container {
+        width: 100%;
+        margin: 0; /* Remove margin for full width on mobile */
+        box-sizing: border-box;
+        padding: 5%
+    }
+
+    td {
+        font-size: 12px;
+    }
+}
+
 #header {
     display: flex;
     justify-content: space-between;
     margin-top: 2%;
     height: 5%;
+    align-items: center;
 }
 
 h1 {
@@ -33,26 +48,27 @@ h3 > :first-child {
     margin-top: 0;
 }
 
-
 .info-icon {
-    font-size: 20px; /* Adjust size as needed */
-    color: black; /* Set the color to black or grey */
+    font-size: 0.75em; 
+    color: white !important;
 }
 
 #info {
-    width: 20px;
-    height: 20px;
+    height: 0.5em;
+    width: 0.5em;
     border-radius: 2px;
     align-items: center;
     justify-content: center;
+    background-color: black;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100%;
 }
 
 #info:hover {
-    background-color: grey;
-}
-
-#info:hover .info-icon {
-    color: white; /* Change color to white on hover */
+    opacity: 30%;
 }
 
 #info-popup {
@@ -63,7 +79,7 @@ h3 > :first-child {
     width: 100%; /* Take up the entire width of the container */
     height: 95%; /* Take up the remaining vertical space */
     background-color: white;
-    padding: 10px;
+    padding: 0 15px 15px 15px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 999;
@@ -74,12 +90,17 @@ h3 > :first-child {
     display: block !important;
 }
 
+.invisible {
+    display: none !important;
+}
+
 #map {
     height: 40vh;
     margin: 0 auto;
     margin-top: 2vh;
-    background-color: white;
+    background-color: rgb(250, 250, 250);
     z-index: 1;
+    border-radius: 20px;
 }
 
 .flag {
@@ -99,23 +120,29 @@ h3 > :first-child {
 
 td {
     height: 100%;
-    padding: 0; /* Remove or adjust padding */
+    padding: 0;
     text-align: left;
     vertical-align: middle;
-    line-height: 40px; /* Match this with the height of the row (e.g., 40px) */
+    line-height: 40px;
     border: 0;
     border-radius: 10px;
-    font-size: 12px;
 }
 
 #current-guess {
     margin: 0 auto;
     margin-bottom: 1vh;
     position: relative;
+    display: flex;
+    width: 100%;
 }
 
 #submit {
     font-size: small;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(75,134,247);
+    border: none;
+    height: 40px;
 }
 
 .guess-made {
@@ -159,14 +186,14 @@ td {
 }
 
 .correct {
-    background-color: lightgreen
+    background-color: lightgreen;
 }
 
 .neighbor {
-    background-color: yellow;
+    background-color: rgb(255, 223, 0);
 }
 
-.suggestions {
+#suggestions {
     list-style: none;
     border-radius: 10px;
     padding: 0;
@@ -203,6 +230,7 @@ li.highlighted {
 
 #enter-guess {
     padding: 0;
+
 }
 
 @keyframes bounceIn {
@@ -260,27 +288,80 @@ li.highlighted {
     display: inline-block;
     padding: 0.25em 0.4em;
     border-radius: 0.5em;
-    background-color: yellow;
+    background-color: rgb(255, 223, 0);
 }
 
 #share {
-    background-color: lightblue;
+    background-color: rgb(75 134 247);
     font-weight: bold;
     margin-top: 0;
     height: 35px;
     border: none;
     border-radius: 10px;
+    color: white;
 }
 
 #share:hover {
-    background-color: #a3c2e0;
+    background-color: rgb(95, 154, 255);
 }
 
-@media only screen and (max-width: 768px) {
-    #container {
-        width: 100%;
-        margin: 0;
-        padding-left: 2%;
-        padding-right: 2%;
+/* Basic styling for the popup */
+.popup {
+    position: fixed;
+    top: -100px; /* Start off-screen */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999; /* Ensure it appears above other content */
+}
+
+/* Animation keyframes for bouncing rotational effect */
+@keyframes swingDown {
+    0% {
+        top: -100px;
+        opacity: 0;
+        transform: translateX(-50%) rotate(0deg);
     }
+    50% {
+        top: 20px;
+        opacity: 1;
+        transform: translateX(-50%) rotate(15deg);
+    }
+    100% {
+        top: 20px;
+        opacity: 1;
+        transform: translateX(-50%) rotate(0deg);
+    }
+}
+
+@keyframes swingUp {
+    0% {
+        top: 20px;
+        opacity: 1;
+        transform: translateX(-50%) rotate(0deg);
+    }
+    50% {
+        top: -100px;
+        opacity: 0;
+        transform: translateX(-50%) rotate(-15deg);
+    }
+    100% {
+        top: -100px;
+        opacity: 0;
+        transform: translateX(-50%) rotate(0deg);
+    }
+}
+
+/* Apply animation classes */
+.popup.show {
+    animation: swingDown 0.5s forwards;
+}
+
+.popup.hide {
+    animation: swingUp 0.5s forwards;
 }
