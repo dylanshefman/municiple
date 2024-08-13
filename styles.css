@@ -1,0 +1,267 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+}
+
+#header-box {
+    width: 40vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    margin: 0;
+}
+
+.caption {
+    font-size: small;
+    font-style: italic;
+    margin-top: 0;
+}
+
+h3 > :first-child {
+    margin-top: 0;
+}
+
+
+.info-icon {
+    font-size: 20px; /* Adjust size as needed */
+    color: black; /* Set the color to black or grey */
+}
+
+#info {
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    align-items: center;
+    justify-content: center;
+}
+
+#info:hover {
+    background-color: grey;
+}
+
+#info:hover .info-icon {
+    color: white; /* Change color to white on hover */
+}
+
+#info-popup {
+    width: 40vw;
+    display: none; /* Hide popup by default */
+    position: absolute;
+    top: 30px; /* Adjust position */
+    left: 0;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+}
+
+.visible {
+    display: block !important;
+}
+
+#map {
+    width: 40vw;
+    height: 40vh;
+    margin: 0 auto;
+    margin-top: 2vh;
+    background-color: white;
+}
+
+.flag {
+    height: 15px;
+    width: auto;
+    vertical-align: middle;
+    border-radius: 2px;
+    margin-right: 5px;
+}
+
+.guesses {
+    margin: 0 auto;
+    table-layout: fixed;
+    border-spacing: 5px 10px;
+}
+
+td {
+    height: 100%;
+    padding: 8px;
+    padding-bottom: 15px;
+    text-align: left;
+    border: 0;
+    border-radius: 10px;
+    vertical-align: middle !important;
+    font-size: 12px;
+}
+
+#current-guess {
+    width: 40vw;
+    margin: 0 auto;
+    margin-bottom: 1vh;
+}
+
+
+#submit {
+    font-size: small;
+}
+
+.guess-made {
+    width: 40vw;
+    height: 40px;
+    background-color: rgb(229 231 235);
+}
+
+.clear-bg {
+    background-color: white;
+}
+
+.filler-td {
+    width: 40vw;
+    background-color: rgb(229 231 235);
+}
+
+.city-td {
+    width: 14vw;
+    font-weight: 600;
+}
+
+.state-td {
+    width: 5vw;
+    text-align: center;
+}
+
+.pop-td {
+    width: 8vw;
+    text-align: center;
+}
+
+.dd-td {
+    width: 8vw;
+    text-align: center;
+}
+
+.incorrect {
+    background-color: rgb(229 231 235);
+}
+
+.correct {
+    background-color: lightgreen
+}
+
+.neighbor {
+    background-color: yellow;
+}
+
+.suggestions {
+    list-style: none;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.suggestions-border {
+    border: 1px solid rgb(229 231 235);
+}
+
+li {
+    height: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+li.highlighted {
+    background-color: rgb(229 231 235); /* Highlight color */
+}
+
+.suggestions li:last-child {
+    margin-bottom: 5px;
+}
+
+#enter-guess {
+    padding: 0;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+        visibility: hidden; /* Hide cells initially */
+    }
+    40% {
+        opacity: 1;
+        transform: scale(1.3); /* First bounce: larger */
+        visibility: visible; /* Ensure cells are visible during animation */
+    }
+    55% {
+        transform: scale(0.8); /* Second bounce: smaller */
+    }
+    70% {
+        transform: scale(1.1); /* Third bounce: slightly larger */
+    }
+    85% {
+        transform: scale(0.95); /* Fourth bounce: slightly smaller */
+    }
+    100% {
+        opacity: 1; /* Ensure opacity is set to 1 at the end */
+        transform: scale(1); /* Final size */
+        visibility: visible; /* Ensure visibility is set to visible at the end */
+    }
+}
+
+.guess-made td {
+    opacity: 0; /* Initially hidden */
+    visibility: hidden; /* Hide cells initially */
+    transform: scale(0.5); /* Scale down to 0.5 initially */
+    animation: bounceIn 0.8s ease forwards; /* Apply bounce animation with extended duration */
+}
+
+.correct-text {
+    font-weight: bold;
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    border-radius: 0.5em;
+    background-color: lightgreen;
+}
+
+.incorrect-text {
+    font-weight: bold;
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    border-radius: 0.5em;
+    background-color: rgb(229 231 235);
+}
+
+.neighbor-text {
+    font-weight: bold;
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    border-radius: 0.5em;
+    background-color: yellow;
+}
+
+#share {
+    width: 40vw;
+    background-color: lightblue;
+    font-weight: bold;
+    margin-top: 0;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+}
+
+#share:hover {
+    background-color: #a3c2e0;
+}

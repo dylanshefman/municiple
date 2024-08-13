@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Municiple</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script type="module" src="data.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div id="header-box">
+                <h1>Municiple</h1>
+                <div id="info">
+                    <i class="fas fa-info info-icon"></i>
+                    <div id="info-popup">
+                        <h2>Guess the Municiple in 6 tries!</h2>
+                        <p>Every day you have the opportunity to guess an American city from its outline. All cities will have a population of at least 150,000 as of the 2020 census. Don't assume that all cities will be the center of a metro area, like Phoenix. Even though Mesa, AZ is technically a Phoenix suburb, it's bigger than cities like Atlanta and Miami!</p>
+                        <p>With each guess you're shown the 🏙️ city, 🌐 state, 👥 population, and 🧭 distance/direction.</p>
+                        <p><strong>🏙️ City: </strong>
+                            This one's simple: you're either <span class="correct-text">right</span> or <span class="incorrect-text">wrong</span>.</p>
+                        <p><strong>🌐 State: </strong>
+                            If your guess isn't in the <span class="correct-text">right state</span> or the <span class="incorrect-text">wrong state</span>, you might be looking in a <span class="neighbor-text">neighboring state</span>.</p>
+                        <p><strong>👥 Population: </strong>
+                            Each guess will direct you to consider a more ↑ or less ↓ populous city in your next guess.</p>
+                        <p><strong>🧭 Distance/direction: </strong>
+                            Each guess will direct you geographically to the target.</p>
+                        <p class="caption">Distances are measured from each city's <a href="https://support.esri.com/en-us/gis-dictionary/centroid">centroid</a>.</p>
+                        <br>
+                        <h2>Sample Guesses</h2>
+                        <table id="ex0"></table>
+                        <p class="caption">Not only is Detroit the wrong city, but Michigan doesn't even border the target state. Aim for a lower population in a city farther west.</p>
+                        <table id="ex1"></table>
+                        <p class="caption">Tucson is not the correct city, but Arizona borders the target state. Aim for a lower population, but still in the 500 thousands.</p>
+                        <table id="ex2"></table>
+                        <p class="caption">Almost - California is the correct state, but shoot a little farther northwest!</p>
+                        <table id="ex3"></table>
+                        <p class="caption">Awesome! Sacramento is right!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+        <table class="guesses">
+            <tr class="guess-made">
+                <td class="filler-td" colspan="4"></td>
+            </tr>
+            <tr class="guess-made">
+                <td class="filler-td" colspan="4"></td>
+            </tr>
+            <tr class="guess-made">
+                <td class="filler-td" colspan="4"></td>
+            </tr>
+            <tr class="guess-made">
+                <td class="filler-td" colspan="4"></td>
+            </tr>
+            <tr class="guess-made">
+                <td class="filler-td" colspan="4"></td>
+            </tr>
+            <tr class="guess-made">
+                <td class="filler-td" colspan="4"></td>
+            </tr>
+        </table>
+        <div id="current-guess">
+            <input type="text" placeholder="Enter a guess:" id="enter-guess"></input>
+            <button id="submit">Guess</button>
+            <ul class="suggestions"></ul>
+        </div>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>
