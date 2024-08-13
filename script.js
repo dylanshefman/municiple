@@ -320,7 +320,7 @@ function endGame() {
             month: 'numeric',
             year: '2-digit'
         });
-        const municipleURL = "";
+        const municipleURL = "dylanshefman.github.io/municiple";
         const shareStrLabeled = `Municiple ${estDate}\n${shareStr.trimEnd()} ${municipleURL}`;
         navigator.clipboard.writeText(shareStrLabeled);
     })
