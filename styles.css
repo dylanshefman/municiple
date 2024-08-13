@@ -2,17 +2,21 @@ body {
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    overflow: hidden;
+}
+
+#container {
+    width: 40%;
+    margin: 0 auto;
+    position: relative;
+    background-color: white;
 }
 
 #header {
     display: flex;
-    justify-content: center;
-}
-
-#header-box {
-    width: 40vw;
-    display: flex;
     justify-content: space-between;
+    margin-top: 2%;
+    height: 5%;
 }
 
 h1 {
@@ -52,18 +56,18 @@ h3 > :first-child {
 }
 
 #info-popup {
-    width: 40vw;
     display: none; /* Hide popup by default */
     position: absolute;
-    top: 30px; /* Adjust position */
+    top: 7%; /* Adjust position below the header */
     left: 0;
+    width: 100%; /* Take up the entire width of the container */
+    height: 95%; /* Take up the remaining vertical space */
     background-color: white;
-    color: black;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    padding: 10px;
+    z-index: 999;
+    overflow-y: auto; /* Allow scrolling if content exceeds popup height */
 }
 
 .visible {
@@ -71,11 +75,11 @@ h3 > :first-child {
 }
 
 #map {
-    width: 40vw;
     height: 40vh;
     margin: 0 auto;
     margin-top: 2vh;
     background-color: white;
+    z-index: 1;
 }
 
 .flag {
@@ -90,34 +94,34 @@ h3 > :first-child {
     margin: 0 auto;
     table-layout: fixed;
     border-spacing: 5px 10px;
+    width: 100%;
 }
 
 td {
     height: 100%;
-    padding: 8px;
-    padding-bottom: 15px;
+    padding: 0; /* Remove or adjust padding */
     text-align: left;
+    vertical-align: middle;
+    line-height: 40px; /* Match this with the height of the row (e.g., 40px) */
     border: 0;
     border-radius: 10px;
-    vertical-align: middle !important;
     font-size: 12px;
 }
 
 #current-guess {
-    width: 40vw;
     margin: 0 auto;
     margin-bottom: 1vh;
+    position: relative;
 }
-
 
 #submit {
     font-size: small;
 }
 
 .guess-made {
-    width: 40vw;
     height: 40px;
     background-color: rgb(229 231 235);
+    width: 100%;
 }
 
 .clear-bg {
@@ -125,13 +129,14 @@ td {
 }
 
 .filler-td {
-    width: 40vw;
     background-color: rgb(229 231 235);
+    width: 100%;
 }
 
 .city-td {
     width: 14vw;
     font-weight: 600;
+    padding-left: 2%;
 }
 
 .state-td {
@@ -165,6 +170,12 @@ td {
     list-style: none;
     border-radius: 10px;
     padding: 0;
+    position: absolute; /* Positioning it absolutely */
+    bottom: 100%; /* Position it above the input field */
+    left: 0;
+    right: 0;
+    z-index: 1000; /* High z-index to ensure it covers any other content */
+    background-color: white; /* Background color to cover other elements */
 }
 
 .suggestions-border {
@@ -253,7 +264,6 @@ li.highlighted {
 }
 
 #share {
-    width: 40vw;
     background-color: lightblue;
     font-weight: bold;
     margin-top: 0;
@@ -264,4 +274,13 @@ li.highlighted {
 
 #share:hover {
     background-color: #a3c2e0;
+}
+
+@media only screen and (max-width: 768px) {
+    #container {
+        width: 100%;
+        margin: 0;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
 }
