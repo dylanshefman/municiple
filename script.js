@@ -321,7 +321,7 @@ function endGame() {
             year: '2-digit'
         });
         const municipleURL = "dylanshefman.github.io/municiple";
-        const shareStrLabeled = `Municiple ${estDate}\n${shareStr.trimEnd()} ${municipleURL}`;
+        const shareStrLabeled = `Municiple ${estDate}\n${shareStr.trimEnd()}\n${municipleURL}`;
         navigator.clipboard.writeText(shareStrLabeled);
     })
 }
@@ -404,9 +404,9 @@ function buildShareStr(guessedCityData, target) {
     
     // city
     if (guessedCityData.city === target.city && guessedCityData.state === target.state) {
-        shareStr_ += "🟥";
-    } else {
         shareStr_ += "🟩";
+    } else {
+        shareStr_ += "🟥";
     }
 
     // state
