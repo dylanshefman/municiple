@@ -26,6 +26,12 @@ body {
     }
 }
 
+@media (min-width: 768px) {
+    #info {
+        padding: 100%;
+    }
+}
+
 #header {
     display: flex;
     justify-content: space-between;
@@ -63,7 +69,6 @@ h3 > :first-child {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 100%;
     cursor: pointer;
 }
 
