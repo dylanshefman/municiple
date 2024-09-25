@@ -42,12 +42,12 @@
                 </tr>
             </table>
             <div id="current-guess">
-                <input type="text" placeholder="Enter a guess:" id="enter-guess"></input>
+                <input type="text" placeholder="Enter a guess:" id="enter-guess" autocomplete="off"></input>
                 <button id="submit">Guess</button>
                 <ul id="suggestions"></ul>
             </div>
             <div id="info-popup">
-                <span class="close-btn">&times;</span>
+                <span id="close-btn">&times;</span>
                 <h2>Guess the Municiple in 6 tries!</h2>
                 <p>Every day you have the opportunity to guess an American city from its outline. All cities will have a population of at least 150,000 as of the 2020 census. Don't assume that all cities will be the center of a metro area, like Phoenix. Even though Mesa, AZ is technically a Phoenix suburb, it's bigger than cities like Atlanta and Miami!</p>
                 <p>With each guess you're shown the 🏙️ city, 🌐 state, 👥 population, and 🧭 distance/direction.</p>
@@ -56,10 +56,10 @@
                 <p><strong>🌐 State: </strong>
                     If your guess isn't in the <span class="correct-text">right state</span> or the <span class="incorrect-text">wrong state</span>, you might be looking in a <span class="neighbor-text">neighboring state</span>.</p>
                 <p><strong>👥 Population: </strong>
-                    Each guess will direct you to consider a more ↑ or less ↓ populous city in your next guess.</p>
+                    Each guess will direct you to consider a more ↑ or less ↓ populous city in your next guess. A <span class="neighbor-text">yellow box</span> means you've got the right digit in the hundred thousands place.</p>
                 <p><strong>🧭 Distance/direction: </strong>
                     Each guess will direct you geographically to the target.</p>
-                <p class="caption">Distances are measured from each city's <a href="https://support.esri.com/en-us/gis-dictionary/centroid">centroid</a>.</p>
+                <p class="caption">Distances are measured from each city's <a href="https://support.esri.com/en-us/gis-dictionary/centroid" target="_blank">centroid</a>.</p>
                 <br>
                 <h2>Sample Guesses</h2>
                 <table id="ex0"></table>

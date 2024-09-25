@@ -48,14 +48,15 @@ function distanceDirection(lon1, lat1, lon2, lat2) {
 }
 
 function hasher() {
-    const estOffset = -5 * 60;
-    const now = new Date();
-    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-    const estDate = new Date(utc + (60000 * estOffset));
+    const estDate = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    });
 
-    const year = estDate.getUTCFullYear();
-    const month = estDate.getUTCMonth() + 1;
-    const day = estDate.getUTCDate();
+    // Extract year, month, and day from the EST date string
+    const [month, day, year] = estDate.split("/");
 
     const dateString = `${year}-${month}-${day}`;
 
@@ -375,6 +376,25 @@ function main() {
         document.getElementById("info-popup").classList.toggle("visible");
         document.getElementById("suggestions").classList.add("invisible");
     })
+
+    document.getElementById("close-btn").addEventListener("click", function() {
+        document.getElementById("info-popup").classList.toggle("visible");
+    })
+
+    document.addEventListener('click', function(event) {
+        const suggestionsContainer = document.getElementById('suggestions');
+        const inputElement = document.getElementById('enter-guess');
+        const submitButton = document.getElementById('submit');
+    
+        // Check if the clicked element is outside of the suggestions box, input field, or submit button
+        if (!suggestionsContainer.contains(event.target) && 
+            !inputElement.contains(event.target) &&
+            !submitButton.contains(event.target)) {
+            suggestionsContainer.innerHTML = "";
+            suggestionsContainer.classList.remove("suggestions-border");
+        }
+    });
+    
 }
 
 function displayExampleTable(tableId, guessedCityData, target) {

@@ -56,7 +56,6 @@ h3 > :first-child {
 #info {
     height: 0.5em;
     width: 0.5em;
-    border-radius: 2px;
     align-items: center;
     justify-content: center;
     background-color: black;
@@ -65,6 +64,7 @@ h3 > :first-child {
     align-items: center;
     justify-content: center;
     padding: 100%;
+    cursor: pointer;
 }
 
 #info:hover {
@@ -126,6 +126,7 @@ td {
     line-height: 40px;
     border: 0;
     border-radius: 10px;
+    box-shadow: 0.25px 0.25px 0.25px 0.25px lightgray;
 }
 
 #current-guess {
@@ -133,6 +134,7 @@ td {
     margin-bottom: 1vh;
     position: relative;
     display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -143,6 +145,12 @@ td {
     background-color: rgb(75,134,247);
     border: none;
     height: 40px;
+    width: 20%;
+    border-radius: 10px;
+}
+
+#submit:hover {
+    opacity: 70%;
 }
 
 .guess-made {
@@ -210,7 +218,8 @@ td {
 }
 
 li {
-    height: 25px;
+    line-height: 30px;
+    height: 30px;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
@@ -224,13 +233,15 @@ li.highlighted {
     background-color: rgb(229 231 235); /* Highlight color */
 }
 
-.suggestions li:last-child {
+#suggestions li:last-child {
     margin-bottom: 5px;
 }
 
 #enter-guess {
-    padding: 0;
-
+    padding: 0 0 0 10px;
+    width: 75%;
+    border-radius: 10px;
+    border: 0.5px solid grey;
 }
 
 @keyframes bounceIn {
@@ -364,4 +375,25 @@ li.highlighted {
 
 .popup.hide {
     animation: swingUp 0.5s forwards;
+}
+
+#close-btn {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    background-color: black;
+    color: white;
+    font-size: 1.25em;
+    line-height: 25px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+#close-btn:hover {
+    opacity: 30%;
 }
